@@ -1,0 +1,28 @@
+---
+title: "Analisis Seri Waktu Multivariat"
+author: "Arditya Criszardin"
+date: "2023-05-01"
+output: html_document
+---
+
+```{r}
+# Memasang paket "MTS" jika belum terpasang
+# install.packages("MTS")
+
+# Memuat data
+my_data <- read.csv("my_data.csv")
+
+# Mengonversi data ke format seri waktu multivariat
+my_ts <- ts(data.frame(my_data), start = c(2010, 1), frequency = 12)
+
+# Melakukan Analisis Seri Waktu Multivariat dengan menggunakan paket "MTS"
+my_var <- VAR(my_ts, p = 2)
+
+# Menampilkan hasil Analisis Seri Waktu Multivariat
+summary(my_var)
+
+# Memprediksi nilai baru menggunakan model yang telah dibuat
+new_data <- c(3, 4, 5) # Memasukkan data baru untuk tiga variabel
+predict(my_var, n.ahead = 12, newdata = new_data)
+```
+
